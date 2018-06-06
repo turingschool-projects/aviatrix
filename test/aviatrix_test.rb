@@ -3,14 +3,6 @@ require './lib/aviatrix'
 
 class AviatrixTest < Minitest::Test
 
-  def test_it_starts_and_stops
-    av = Aviatrix.new
-    av.start
-    assert av.running?
-    av.command("quit")
-    refute av.running?
-  end
-
   def test_it_starts_in_st_louis
     av = Aviatrix.new
     av.start
@@ -77,7 +69,7 @@ class AviatrixTest < Minitest::Test
     assert av.fly_to(:phoenix)
   end
 
-  def test_it_has_a_fuel_capacity
+  def test_it_has_a_fuel_level
     av = Aviatrix.new
     av.start
 
@@ -86,5 +78,19 @@ class AviatrixTest < Minitest::Test
     final_fuel = av.fuel_level
 
     assert final_fuel < initial_fuel
+  end
+
+  def test_it_refuels
+    av = Aviatrix.new
+    av.start
+
+    assert av.fuel_full?
+
+    av.fly_to(:phoenix)
+    refute av.fuel_full?
+
+    av.refuel
+
+    assert av.fuel_full?
   end
 end

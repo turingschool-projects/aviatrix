@@ -4,7 +4,7 @@ class Aviatrix
   def initialize
     @running = false
     @location = starting_location
-    @fuel_level = 250
+    @fuel_level = max_fuel
     @miles_per_gallon = 0.5
   end
 
@@ -21,10 +21,16 @@ class Aviatrix
     @running
   end
 
-  def command(input)
-    case input
-    when "quit" then stop
-    end
+  def max_fuel
+    1000
+  end
+
+  def fuel_full?
+    fuel_level == max_fuel
+  end
+
+  def refuel
+    @fuel_level = max_fuel
   end
 
   def fly_to(destination)
