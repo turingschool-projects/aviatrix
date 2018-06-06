@@ -105,4 +105,9 @@ class AviatrixTest < Minitest::Test
 
     assert av.fuel_cost > 1
   end
+
+  def test_fuel_price_has_some_variation_by_location
+    av = Aviatrix.new
+    assert av.location_names.keys.collect{|loc| av.fuel_price(loc)}.uniq.count > 1
+  end
 end

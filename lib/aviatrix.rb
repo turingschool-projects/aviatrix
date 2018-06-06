@@ -32,12 +32,21 @@ class Aviatrix
 
   def refuel
     fuel_needed = max_fuel - fuel_level
-    @fuel_cost += fuel_needed * fuel_price
+    @fuel_cost += fuel_needed * fuel_price(location)
     @fuel_level = max_fuel
   end
 
-  def fuel_price
-    5
+  def fuel_price(location_a)
+    fuel_prices[location_a]
+  end
+
+  def fuel_prices
+    {
+      :st_louis => 179,
+      :phoenix => 184,
+      :denver => 165,
+      :slc => 195
+    }
   end
 
   def fly_to(destination)
