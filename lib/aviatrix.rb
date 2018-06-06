@@ -1,11 +1,12 @@
 class Aviatrix
-  attr_reader :location, :distance_traveled, :fuel_level, :miles_per_gallon
+  attr_reader :location, :distance_traveled, :fuel_level, :miles_per_gallon, :fuel_cost
 
   def initialize
     @running = false
     @location = starting_location
     @fuel_level = max_fuel
     @miles_per_gallon = 0.5
+    @fuel_cost = 0
   end
 
   def start
@@ -30,7 +31,13 @@ class Aviatrix
   end
 
   def refuel
+    fuel_needed = max_fuel - fuel_level
+    @fuel_cost += fuel_needed * fuel_price
     @fuel_level = max_fuel
+  end
+
+  def fuel_price
+    5
   end
 
   def fly_to(destination)

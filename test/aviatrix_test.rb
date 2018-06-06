@@ -93,4 +93,16 @@ class AviatrixTest < Minitest::Test
 
     assert av.fuel_full?
   end
+
+  def test_fuel_costs_money
+    av = Aviatrix.new
+    av.start
+
+    assert_equal 0, av.fuel_cost
+
+    av.fly_to(:phoenix)
+    av.refuel
+
+    assert av.fuel_cost > 1
+  end
 end
