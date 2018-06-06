@@ -61,6 +61,14 @@ class AviatrixStub
     0 #stub
   end
 
+  def distance_to(target)
+    0 #stub
+  end
+
+  def known_destinations
+    [:st_louis] #stub
+  end
+
   def known_distances
     {:st_louis => {:st_louis => 0} } #stub
   end
