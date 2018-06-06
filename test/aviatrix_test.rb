@@ -68,4 +68,23 @@ class AviatrixTest < Minitest::Test
       end
     end
   end
+
+  def test_it_starts_before_flying
+    av = Aviatrix.new
+
+    refute av.fly_to(:phoenix)
+    av.start
+    assert av.fly_to(:phoenix)
+  end
+
+  def test_it_has_a_fuel_capacity
+    av = Aviatrix.new
+    av.start
+
+    initial_fuel = av.fuel_level
+    av.fly_to(:phoenix)
+    final_fuel = av.fuel_level
+
+    assert final_fuel < initial_fuel
+  end
 end

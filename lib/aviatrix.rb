@@ -1,9 +1,11 @@
 class Aviatrix
-  attr_reader :location, :distance_traveled
+  attr_reader :location, :distance_traveled, :fuel_level, :miles_per_gallon
 
   def initialize
-    @running = true
+    @running = false
     @location = starting_location
+    @fuel_level = 250
+    @miles_per_gallon = 0.5
   end
 
   def start
@@ -26,10 +28,15 @@ class Aviatrix
   end
 
   def fly_to(destination)
-    if valid_destination?(destination)
+    if running? && valid_destination?(destination)
       @distance_traveled += distance_between(location, destination)
+      @fuel_level -= fuel_to_fly(location, destination)
       @location = destination
     end
+  end
+
+  def fuel_to_fly(location_a, location_b)
+    (distance_between(location_a, location_b).to_f / miles_per_gallon)
   end
 
   def distance_between(location_a, location_b)
