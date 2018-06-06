@@ -72,9 +72,9 @@ def refuel(plane)
   puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totalling $#{'%.2f' % refuel_data[:spent]}"
 end
 
-puts_slow "Welcome to the Aviatrix Flight System"
-
 av = AviatrixStub.new
+puts_slow "Welcome to the Aviatrix Flight System by #{av.author}"
+
 av.start
 puts_slow "You're currently in #{av.location_name}"
 

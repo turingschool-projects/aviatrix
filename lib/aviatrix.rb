@@ -13,6 +13,10 @@ class Aviatrix
     @distance_traveled = 0
   end
 
+  def author
+    "None"
+  end
+
   def start
     @running = true
   end
