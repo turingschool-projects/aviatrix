@@ -34,4 +34,14 @@ class AviatrixTest < Minitest::Test
     refute av.fly_to(:tampa)
     assert av.location == av.starting_location
   end
+
+  def test_it_tracks_miles_traveled
+    av = Aviatrix.new
+    av.start
+
+    assert_equal 0, av.distance_traveled
+
+    assert av.fly_to(:denver)
+    refute_equal 0, av.distance_traveled
+  end
 end

@@ -1,5 +1,5 @@
 class Aviatrix
-  attr_reader :location
+  attr_reader :location, :distance_traveled
 
   def initialize
     @running = true
@@ -8,6 +8,7 @@ class Aviatrix
 
   def start
     @running = true
+    @distance_traveled = 0
   end
 
   def stop
@@ -26,8 +27,25 @@ class Aviatrix
 
   def fly_to(destination)
     if valid_destination?(destination)
+      @distance_traveled += distance_between(location, destination)
       @location = destination
     end
+  end
+
+  def distance_between(location_a, location_b)
+    known_distances[location_a][location_b]
+  end
+
+  def known_distances
+    {
+      :st_louis =>
+        {
+          :st_louis => 0,
+          :phoenix  => 1,
+          :denver   => 2,
+          :slc      => 3
+        }
+    }
   end
 
   def valid_destination?(target)
@@ -39,8 +57,7 @@ class Aviatrix
       :st_louis => "St. Louis",
       :phoenix => "Phoenix",
       :denver => "Denver",
-      :slc => "Salt Lake City",
-      :nyc => "New York City"
+      :slc => "Salt Lake City"
     }
   end
 
