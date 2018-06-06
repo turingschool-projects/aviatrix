@@ -68,7 +68,8 @@ end
 def refuel(plane)
   puts_slow "Refueling..."
   refuel_data = plane.refuel
-  puts_slow "⛽ Pumped #{refuel_data[:quantity]} gallons at $#{refuel_data[:unit_price]}/gallon totalling $#{'%.2f' % refuel_data[:spent]}"
+  puts_slow "⛽ Here in #{plane.location_name}, jet fuel costs $#{refuel_data[:unit_price]}/gallon"
+  puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totalling $#{'%.2f' % refuel_data[:spent]}"
 end
 
 puts_slow "Welcome to the Aviatrix Flight System"
