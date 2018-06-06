@@ -28,14 +28,11 @@ def fly(plane)
   puts_slow "Where would you like to fly to?"
   puts ""
 
-  markers = []
-  possible_destinations = plane.known_distances[plane.location]
-  possible_destinations.each.with_index do |data, index|
-    menu_number = index
-    city_name = plane.name_for(data[0])
-    distance = data[1]
-    puts_fast "#{menu_number}) #{city_name} (#{distance} miles)"
-    markers << data[0]
+  destinations = plane.known_destinations
+  destinations.each.with_index do |marker, index|
+    city_name = plane.name_for(marker)
+    distance = plane.distance_to(marker)
+    puts_fast "#{index}) #{city_name} (#{distance} miles)"
   end
 
   puts ""
@@ -43,13 +40,13 @@ def fly(plane)
   raw_input = gets.chomp.strip
   number = raw_input.to_i
 
-  if (raw_input == number.to_s) && (0...possible_destinations.count).include?(number)
+  if (raw_input == number.to_s) && (0...destinations.count).include?(number)
 
     puts_slow "🛫 Preparing for takeoff..."
     puts_slow "Flying..."
 
     begin
-      plane.fly_to(markers[number])
+      plane.fly_to(destinations[number])
     rescue RuntimeError => e
       puts ""
       puts "🔥 " * 24
@@ -72,7 +69,7 @@ def refuel(plane)
   puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totalling $#{'%.2f' % refuel_data[:spent]}"
 end
 
-av = AviatrixStub.new
+av = Aviatrix.new
 puts_slow "Welcome to the Aviatrix Flight System by #{av.author}"
 
 av.start

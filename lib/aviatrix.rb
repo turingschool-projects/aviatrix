@@ -81,6 +81,14 @@ class Aviatrix
     end
   end
 
+  def distance_to(target)
+    distance_between(location, target)
+  end
+
+  def known_destinations
+    AviatrixData.location_names.keys
+  end
+
   def known_distances
     AviatrixData.known_distances
   end
