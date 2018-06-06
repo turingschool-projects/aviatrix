@@ -22,7 +22,7 @@ class AviatrixStub
   end
 
   def running?
-    true #stub
+    @running
   end
 
   def max_fuel
