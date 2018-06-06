@@ -35,7 +35,7 @@ class AviatrixTest < Minitest::Test
     assert av.location == av.starting_location
   end
 
-  def test_it_tracks_miles_traveled
+  def test_it_tracks_distance_traveled
     av = Aviatrix.new
     av.start
 
@@ -43,5 +43,29 @@ class AviatrixTest < Minitest::Test
 
     assert av.fly_to(:denver)
     refute_equal 0, av.distance_traveled
+  end
+
+  def test_it_accumulates_distance_traveled
+    av = Aviatrix.new
+    av.start
+
+    assert av.fly_to(:denver)
+    first_total = av.distance_traveled
+
+    assert av.fly_to(:st_louis)
+    second_total = av.distance_traveled
+
+    assert second_total > first_total
+  end
+
+  def test_all_distances_are_defined
+    av = Aviatrix.new
+
+    locations = av.location_names.keys
+    locations.each do |current|
+      locations.each do |target|
+        assert av.distance_between(current, target)
+      end
+    end
   end
 end

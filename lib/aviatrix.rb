@@ -33,7 +33,11 @@ class Aviatrix
   end
 
   def distance_between(location_a, location_b)
-    known_distances[location_a][location_b]
+    begin
+      known_distances[location_a][location_b]
+    rescue NoMethodError => e
+      raise("Distance Unknown: #{location_a.inspect} to #{location_b.inspect}")
+    end
   end
 
   def known_distances
@@ -44,6 +48,27 @@ class Aviatrix
           :phoenix  => 1,
           :denver   => 2,
           :slc      => 3
+        },
+      :phoenix =>
+        {
+          :st_louis => 1,
+          :phoenix  => 0,
+          :denver   => 2,
+          :slc      => 3
+        },
+      :denver =>
+        {
+          :st_louis => 1,
+          :phoenix  => 2,
+          :denver   => 0,
+          :slc      => 3
+        },
+      :slc =>
+        {
+          :st_louis => 1,
+          :phoenix  => 2,
+          :denver   => 3,
+          :slc      => 0
         }
     }
   end
