@@ -17,7 +17,7 @@ def gauges(plane)
   puts ""
   puts_fast "| Running:   | #{plane.running? ? '✅' : '❌'}"
   puts_fast "| Location:  | #{plane.location_name}"
-  puts_fast "| Fuel:      | #{plane.fuel_level} gallons"
+  puts_fast "| Fuel:      | #{'%.2f' % plane.fuel_level} gallons"
   puts_fast "| Max Fuel:  | #{plane.max_fuel} gallons"
   puts_fast "| MPG:       | #{plane.miles_per_gallon}"
   puts_fast "| Fuel Bill: | $#{'%.2f' % plane.fuel_cost}"
@@ -41,20 +41,9 @@ def fly(plane)
   number = raw_input.to_i
 
   if (raw_input == number.to_s) && (0...destinations.count).include?(number)
-
     puts_slow "🛫 Preparing for takeoff..."
     puts_slow "Flying..."
-
-    begin
-      plane.fly_to(destinations[number])
-    rescue RuntimeError => e
-      puts ""
-      puts "🔥 " * 24
-      puts e.message
-      puts "🔥 " * 24
-      `say oh no!`
-      exit
-    end
+    plane.fly_to(destinations[number])
     puts_slow "🛬 You've arrived in #{plane.location_name}!"
     gauges(plane)
   else
@@ -66,7 +55,7 @@ def refuel(plane)
   puts_slow "Refueling..."
   refuel_data = plane.refuel
   puts_slow "⛽ Here in #{plane.location_name}, jet fuel costs $#{refuel_data[:unit_price]}/gallon"
-  puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totalling $#{'%.2f' % refuel_data[:spent]}"
+  puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totaling $#{'%.2f' % refuel_data[:spent]}"
 end
 
 av = AviatrixStub.new
@@ -80,7 +69,7 @@ command = ""
 until command == "q"
   puts ""
   puts "What would you like to do?"
-  puts "a) 📊 check the plane data"
+  puts "a) 📊 check the plane gauges"
   puts "b) 🛫 fly to a different city"
   puts "c) ⛽ refuel"
   puts "q) ❌ quit"
