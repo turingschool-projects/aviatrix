@@ -71,7 +71,7 @@ def fuel_check(plane)
   end
 end
 
-av = AviatrixStub.new
+av = Aviatrix.new
 puts_slow "Welcome to the Aviatrix Flight System by #{av.author}"
 
 av.start
