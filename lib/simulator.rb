@@ -1,4 +1,4 @@
-require './lib/aviatrix_stub'
+require './lib/aviatrix'
 
 def puts_slow(message)
   puts ""
