@@ -46,7 +46,6 @@ class AviatrixStub
     @distance_traveled += distance_to(destination)
     @fuel_level -= distance_to(destination) / miles_per_gallon
     @location = destination
-    fuel_check #keep this as the last line!
   end
 
   def distance_to(target)
@@ -71,18 +70,5 @@ class AviatrixStub
 
   def location_name
     AviatrixData.location_names[location]
-  end
-
-  def fuel_check
-    if fuel_level < 0
-      puts ""
-      puts "🔥 " * 24
-      puts "Oh no! You've run out of fuel and crashed on the way to #{name_for(location)}!"
-      puts "🔥 " * 24
-      `say oh no!`
-      exit
-    else
-      true
-    end
   end
 end
