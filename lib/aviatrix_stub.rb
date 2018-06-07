@@ -8,7 +8,7 @@ class AviatrixStub
     @running = false
     @location = starting_location
     @fuel_level = max_fuel
-    @miles_per_gallon = 0.5
+    @miles_per_gallon = 0.4
     @fuel_cost = 0
     @distance_traveled = 0
   end
@@ -26,7 +26,7 @@ class AviatrixStub
   end
 
   def max_fuel
-    0 #stub
+    5000
   end
 
   def fuel_full?
@@ -34,23 +34,34 @@ class AviatrixStub
   end
 
   def refuel
+    fuel_needed = max_fuel - fuel_level
+    fuel_price = AviatrixData.fuel_prices[location]
+    cost = fuel_needed * fuel_price
+    @fuel_cost += cost
+    @fuel_level = max_fuel
     {
-      :quantity => 0,   #stub
-      :unit_price => 0, #stub
-      :spent => 0       #stub
+      :quantity => fuel_needed,
+      :unit_price => fuel_price,
+      :spent => cost
     }
   end
 
-  def fuel_price(location_a)
-    0 #stub
-  end
-
-  def fuel_prices
-    AviatrixData.fuel_prices
-  end
-
   def fly_to(destination)
-    true #stub
+    @distance_traveled += distance_to(destination)
+    @fuel_level -= distance_to(destination) / miles_per_gallon
+    @location = destination
+    fuel_check #keep this as the last line!
+  end
+
+  def fuel_check
+    if fuel_level < 0
+      puts ""
+      puts "🔥 " * 24
+      puts "Oh no! You've run out of fuel and crashed on the way to #{name_for(location)}!"
+      puts "🔥 " * 24
+      `say oh no!`
+      exit
+    end
   end
 
   def fuel_to_fly(location_a, location_b)
@@ -62,11 +73,11 @@ class AviatrixStub
   end
 
   def distance_to(target)
-    0 #stub
+    AviatrixData.known_distances[location][target]
   end
 
   def known_destinations
-    [:st_louis] #stub
+    AviatrixData.location_names.keys
   end
 
   def known_distances
@@ -78,11 +89,11 @@ class AviatrixStub
   end
 
   def location_names
-    ["St. Louis"] #stub
+    AviatrixData.location_names
   end
 
   def name_for(location_marker)
-    "St. Louis" #stub
+    location_names[location_marker]
   end
 
   def starting_location
@@ -90,6 +101,6 @@ class AviatrixStub
   end
 
   def location_name
-    "St. Louis" #stub
+    AviatrixData.location_names[location]
   end
 end

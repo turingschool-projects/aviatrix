@@ -13,7 +13,8 @@ class AviatrixData
       :st_louis => "St. Louis",
       :phoenix => "Phoenix",
       :denver => "Denver",
-      :slc => "Salt Lake City"
+      :slc => "Salt Lake City",
+      :sf => "San Francisco"
     }
   end
 
@@ -24,29 +25,41 @@ class AviatrixData
           :st_louis => 0,
           :phoenix  => 1260,
           :denver   => 768,
-          :slc      => 1150
+          :slc      => 1150,
+          :sf       => 1730
         },
       :phoenix =>
         {
           :st_louis => 1260,
           :phoenix  => 0,
           :denver   => 601,
-          :slc      => 508
+          :slc      => 508,
+          :sf       => 650
         },
       :denver =>
         {
           :st_louis => 768,
           :phoenix  => 601,
           :denver   => 0,
-          :slc      => 390
+          :slc      => 390,
+          :sf       => 965
         },
       :slc =>
         {
           :st_louis => 1150,
           :phoenix  => 508,
           :denver   => 390,
-          :slc      => 0
-        }
+          :slc      => 0,
+          :sf       => 598
+        },
+        :sf =>
+          {
+            :st_louis => 1730,
+            :phoenix  => 650,
+            :denver   => 965,
+            :slc      => 598,
+            :sf       => 0
+          }
     }
   end
 end
