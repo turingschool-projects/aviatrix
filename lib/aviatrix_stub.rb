@@ -29,10 +29,6 @@ class AviatrixStub
     5000
   end
 
-  def fuel_full?
-    true #stub
-  end
-
   def refuel
     fuel_needed = max_fuel - fuel_level
     fuel_price = AviatrixData.fuel_prices[location]
@@ -53,39 +49,12 @@ class AviatrixStub
     fuel_check #keep this as the last line!
   end
 
-  def fuel_check
-    if fuel_level < 0
-      puts ""
-      puts "🔥 " * 24
-      puts "Oh no! You've run out of fuel and crashed on the way to #{name_for(location)}!"
-      puts "🔥 " * 24
-      `say oh no!`
-      exit
-    end
-  end
-
-  def fuel_to_fly(location_a, location_b)
-    0 #stub
-  end
-
-  def distance_between(location_a, location_b)
-    0 #stub
-  end
-
   def distance_to(target)
     AviatrixData.known_distances[location][target]
   end
 
   def known_destinations
     AviatrixData.location_names.keys
-  end
-
-  def known_distances
-    {:st_louis => {:st_louis => 0} } #stub
-  end
-
-  def valid_destination?(target)
-    true #stub
   end
 
   def location_names
@@ -102,5 +71,16 @@ class AviatrixStub
 
   def location_name
     AviatrixData.location_names[location]
+  end
+
+  def fuel_check
+    if fuel_level < 0
+      puts ""
+      puts "🔥 " * 24
+      puts "Oh no! You've run out of fuel and crashed on the way to #{name_for(location)}!"
+      puts "🔥 " * 24
+      `say oh no!`
+      exit
+    end
   end
 end
