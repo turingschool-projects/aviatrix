@@ -43,6 +43,7 @@ def fly(plane)
     puts_slow "🛫 Preparing for takeoff..."
     puts_slow "Flying..."
     plane.fly_to(destinations[number])
+    plane.fuel_check
     puts_slow "🛬 You've arrived in #{plane.location_name}!"
     gauges(plane)
   else
@@ -55,6 +56,19 @@ def refuel(plane)
   refuel_data = plane.refuel
   puts_slow "⛽ Here in #{plane.location_name}, jet fuel costs $#{refuel_data[:unit_price]}/gallon"
   puts_slow "⛽ You refueled #{refuel_data[:quantity]} gallons totaling $#{'%.2f' % refuel_data[:spent]}"
+end
+
+def fuel_check(plane)
+  if plane.fuel_level < 0
+    puts ""
+    puts "🔥 " * 24
+    puts "Oh no! You've run out of fuel and crashed on the way to #{plane.location_name}!"
+    puts "🔥 " * 24
+    `say oh no!`
+    exit
+  else
+    true
+  end
 end
 
 av = AviatrixStub.new
