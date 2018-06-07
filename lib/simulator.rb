@@ -43,7 +43,7 @@ def fly(plane)
     puts_slow "🛫 Preparing for takeoff..."
     puts_slow "Flying..."
     plane.fly_to(destinations[number])
-    plane.fuel_check
+    fuel_check(plane)
     puts_slow "🛬 You've arrived in #{plane.location_name}!"
     gauges(plane)
   else
