@@ -8,7 +8,7 @@ class AviatrixStub
     @running = false
     @location = starting_location
     @fuel_level = max_fuel
-    @miles_per_gallon = 0.5
+    @miles_per_gallon = 0.4
     @fuel_cost = 0
     @distance_traveled = 0
   end
