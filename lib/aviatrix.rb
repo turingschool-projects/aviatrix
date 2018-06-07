@@ -1,6 +1,6 @@
 require './lib/aviatrix_data'
 
-class AviatrixStub
+class Aviatrix
   attr_reader :location, :distance_traveled, :fuel_level,
               :miles_per_gallon, :fuel_cost, :odometer
 
