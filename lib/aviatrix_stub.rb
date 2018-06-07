@@ -73,6 +73,8 @@ class AviatrixStub
       puts "🔥 " * 24
       `say oh no!`
       exit
+    else
+      true
     end
   end
 end
