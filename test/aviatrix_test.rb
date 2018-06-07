@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require './lib/aviatrix_stub'
+require './lib/aviatrix'
 
 class AviatrixTest < Minitest::Test
 
