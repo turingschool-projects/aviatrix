@@ -29,10 +29,6 @@ class AviatrixStub
     0 #stub
   end
 
-  def fuel_full?
-    true #stub
-  end
-
   def refuel
     {
       :quantity => 0,   #stub
@@ -41,24 +37,8 @@ class AviatrixStub
     }
   end
 
-  def fuel_price(location_a)
-    0 #stub
-  end
-
-  def fuel_prices
-    AviatrixData.fuel_prices
-  end
-
   def fly_to(destination)
     true #stub
-  end
-
-  def fuel_to_fly(location_a, location_b)
-    0 #stub
-  end
-
-  def distance_between(location_a, location_b)
-    0 #stub
   end
 
   def distance_to(target)
@@ -67,14 +47,6 @@ class AviatrixStub
 
   def known_destinations
     [:st_louis] #stub
-  end
-
-  def known_distances
-    {:st_louis => {:st_louis => 0} } #stub
-  end
-
-  def valid_destination?(target)
-    true #stub
   end
 
   def location_names
@@ -91,5 +63,16 @@ class AviatrixStub
 
   def location_name
     "St. Louis" #stub
+  end
+
+  def fuel_check
+    if fuel_level < 0
+      puts ""
+      puts "🔥 " * 24
+      puts "Oh no! You've run out of fuel and crashed on the way to #{name_for(location)}!"
+      puts "🔥 " * 24
+      `say oh no!`
+      exit
+    end
   end
 end
